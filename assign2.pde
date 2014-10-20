@@ -1,5 +1,4 @@
-<!--fork	gh-pages	needs	to	commit	once	to	
-trigger	webpage-->
+
 // global variables
 float frogX, frogY, frogW, frogH, frogInitX, frogInitY;
 float leftCar1X, leftCar1Y, leftCar1W, leftCar1H;//car1
