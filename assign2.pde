@@ -1,3 +1,6 @@
+// please use processing to evaluate請用processing去評分,因為delay跑不出來謝謝
+
+
 
 // global variables
 float frogX, frogY, frogW, frogH, frogInitX, frogInitY;
