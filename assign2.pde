@@ -1,4 +1,3 @@
-//please use processing to evaluate請用processing去評分,因為delay跑不出來謝謝
 // global variables
 float frogX, frogY, frogW, frogH, frogInitX, frogInitY;
 float leftCar1X, leftCar1Y, leftCar1W, leftCar1H;//car1
@@ -18,6 +17,7 @@ final int GAME_RUN = 4;
 final int FROG_DIE = 5;
 int gameState;
 int interval=0;//use millis() to record current time
+int currentTime = 0;
 
 // Sprites
 PImage imgFrog, imgDeadFrog;
@@ -69,13 +69,16 @@ void draw(){
         background(10,110,16);
         text("Press Enter", width/3, height/2);    
         break;
-    case FROG_DIE:
-      delay(1000);
-      life--;
+   
+        
+  case FROG_DIE:
+        if(millis()-currentTime >= 1000){
+         life--;
         frogX=frogInitX;
         frogY=frogInitY;
         gameState = GAME_RUN;
-        break;
+         }
+         break;
     case GAME_RUN:
         background(10,110,16);
         //gameState 
@@ -125,6 +128,7 @@ void draw(){
          // car1 hitTest
           if((frogCY>leftCar1Y) &&(frogCY<leftCar1Y+leftCar1H)){
             if((frogCX>leftCar1X)&&(frogCX<leftCar1X+leftCar1W)){
+            currentTime = millis();
             image(imgDeadFrog,frogX,frogY);
             println("in");
             gameState = FROG_DIE;
@@ -133,6 +137,7 @@ void draw(){
          // car2 hitTest
          if((frogCY>leftCar2Y) &&(frogCY<leftCar2Y+leftCar2H)){
             if((frogCX>leftCar2X)&&(frogCX<leftCar2X+leftCar2W)){
+            currentTime = millis();
             image(imgDeadFrog,frogX,frogY);
             println("in");
             gameState = FROG_DIE;
@@ -141,6 +146,7 @@ void draw(){
          // car3 hitTest
             if((frogCY>rightCar1Y) &&(frogCY<rightCar1Y+rightCar1H)){
             if((frogCX>rightCar1X)&&(frogCX<rightCar1X+rightCar1W)){
+            currentTime = millis();
             image(imgDeadFrog,frogX,frogY);
             println("in");
             gameState = FROG_DIE;
@@ -149,6 +155,7 @@ void draw(){
          // car4 hitTest
          if((frogCY>rightCar2Y) &&(frogCY<rightCar2Y+rightCar2H)){
             if((frogCX>rightCar2X)&&(frogCX<rightCar2X+rightCar2W)){
+            currentTime = millis();
             image(imgDeadFrog,frogX,frogY);
             println("in");
             gameState = FROG_DIE;
