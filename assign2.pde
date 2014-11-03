@@ -16,6 +16,7 @@ final int GAME_LOSE = 3;
 final int GAME_RUN = 4;
 final int FROG_DIE = 5;
 int gameState;
+int currentTime =0;
 int interval=0;//use millis() to record current time
 
 // Sprites
@@ -69,12 +70,11 @@ void draw(){
         text("Press Enter", width/3, height/2);    
         break;
     case FROG_DIE:
-      delay(1000);
-      life--;
-        frogX=frogInitX;
-        frogY=frogInitY;
-        gameState = GAME_RUN;
-        break;
+    if(millis()-currentTime >= 1000){
+    frogX=frogInitX;
+    frogY=frogInitY;
+    gameState = GAME_RUN;
+    }
     case GAME_RUN:
         background(10,110,16);
         //gameState 
@@ -124,32 +124,36 @@ void draw(){
          // car1 hitTest
           if((frogCY>leftCar1Y) &&(frogCY<leftCar1Y+leftCar1H)){
             if((frogCX>leftCar1X)&&(frogCX<leftCar1X+leftCar1W)){
+            currentTime = millis();
             image(imgDeadFrog,frogX,frogY);
-            println("in");
+           life--;
             gameState = FROG_DIE;
             }
            }
          // car2 hitTest
          if((frogCY>leftCar2Y) &&(frogCY<leftCar2Y+leftCar2H)){
             if((frogCX>leftCar2X)&&(frogCX<leftCar2X+leftCar2W)){
+            currentTime = millis();
             image(imgDeadFrog,frogX,frogY);
-            println("in");
+           life--;
             gameState = FROG_DIE;
             }
            }
          // car3 hitTest
             if((frogCY>rightCar1Y) &&(frogCY<rightCar1Y+rightCar1H)){
             if((frogCX>rightCar1X)&&(frogCX<rightCar1X+rightCar1W)){
+            currentTime = millis();
             image(imgDeadFrog,frogX,frogY);
-            println("in");
+            life--;
             gameState = FROG_DIE;
             }
            }
          // car4 hitTest
          if((frogCY>rightCar2Y) &&(frogCY<rightCar2Y+rightCar2H)){
             if((frogCX>rightCar2X)&&(frogCX<rightCar2X+rightCar2W)){
+            currentTime = millis();
             image(imgDeadFrog,frogX,frogY);
-            println("in");
+            life--;
             gameState = FROG_DIE;
             }
            }
@@ -186,6 +190,9 @@ void keyPressed() {
           
         case DOWN:
           frogY += speed*2;
+          if(frogY >height-frogH){
+          frogY  = height -frogH;}
+        
         
           break;
           
